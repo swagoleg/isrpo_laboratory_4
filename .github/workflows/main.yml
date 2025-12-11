@@ -1,0 +1,27 @@
+name: "laba 4 tests"
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    name: "Run tests on OS"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: " Checkout repo "
+        uses: actions/checkout@v3
+
+      - name: " Set up "
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: "Run unittest"
+        run: python -m unittest discover
+
